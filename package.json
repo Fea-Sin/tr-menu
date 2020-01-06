@@ -1,12 +1,71 @@
 {
   "name": "tr-menu",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "description": "menu ui compoent for react",
+  "keywords": [
+    "react",
+    "react-component",
+    "menu",
+    "ui",
+    "react-menu"
+  ],
+  "files": [
+    "es",
+    "lib",
+    "assets/*.css",
+    "assets/*.less"
+  ],
+  "main": "./lib/index",
+  "module": "./es/index",
+  "author": "feasin",
+  "homepage": "todo",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Fea-Sin/tr-menu.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "bugs": {
+    "url": "http://github.com:Fea-Sin/tr-menu/issues"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development father doc dev --storybook",
+    "build": "father doc build --storybook",
+    "compile": "father build && lessc assets/index.less assets/index.css",
+    "prepublishOnly": "npm run compile && np --no-cleanup --yolo --no-publish",
+    "lint": "eslint src/ examples/ --ext .tsx,.ts,.jsx,.js",
+    "test": "father test",
+    "coverage": "father test --coverage"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "dependencies": {
+    "classnames": "2.x",
+    "mini-store": "^2.0.0",
+    "rc-animate": "^2.10.1",
+    "rc-trigger": "^4.0.0-alpha.4",
+    "rc-util": "^4.13.0",
+    "resize-observer-polyfill": "^1.5.0",
+    "scroll-into-view-if-needed": "^2.2.20",
+    "shallowequal": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "@types/warning": "^3.0.0",
+    "cross-env": "^6.0.0",
+    "css-animation": "^2.0.4",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.4.0",
+    "father": "^2.22.0",
+    "less": "^3.10.3",
+    "np": "^5.0.3",
+    "prop-types": "^15.5.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "typescript": "^3.5.2"
+  }
 }
