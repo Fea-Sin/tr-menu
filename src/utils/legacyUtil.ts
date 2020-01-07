@@ -1,5 +1,5 @@
 import warning from 'rc-util/lib/warning';
-import { MotionType, TransitionNameType, OpenAnimation } from "../interface";
+import { MotionType, TransitionNameType, OpenAnimation } from '../interface';
 
 interface GetMotionProps {
   motion?: MotionType;
@@ -15,24 +15,24 @@ export function getMotion({
   openTransitionName,
 }: GetMotionProps): MotionType {
   if (motion) {
-    return motion
+    return motion;
   }
 
   if (typeof openAnimation === 'object' && openAnimation) {
     warning(
       false,
-      'Object type of `openAnimation` is removed. Please use `motion` instead.'
-    )
+      'Object type of `openAnimation` is removed. Please use `motion` instead.',
+    );
   } else if (typeof openAnimation === 'string') {
     return {
-      motionName: `${prefixCls}-open-${openAnimation}`
-    }
+      motionName: `${prefixCls}-open-${openAnimation}`,
+    };
   }
 
   if (openTransitionName) {
     return {
-      motionName: openTransitionName
-    }
+      motionName: openTransitionName,
+    };
   }
 
   return null;

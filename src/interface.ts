@@ -35,30 +35,30 @@ export type OpenEventHandler = (
   keys:
     | React.key[]
     | {
-      key: React.key;
-      item: React.ReactInstance;
-      trigger: string;
-      open: boolean;
-    },
+        key: React.key;
+        item: React.ReactInstance;
+        trigger: string;
+        open: boolean;
+      },
 ) => void;
 
-export type MenuMode = 
+export type MenuMode =
   | 'horizontal'
   | 'vertical'
   | 'vertical-left'
   | 'vertical-right'
   | 'inline';
-  
+
 export type OpenAnimation = string | Record<string, any>;
 
-export interface MiniStore = {
+export interface MiniStore {
   getState: () => any;
   setState: (state: any) => void;
 }
 
 export type LegacyFunctionRef = (node: React.ReactInstance) => void;
 
-export type BuiltinPlacements = Record<string, any>
+export type BuiltinPlacements = Record<string, any>;
 
 export type TriggerSubMenuAction = 'click' | 'hover';
 
