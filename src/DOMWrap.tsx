@@ -22,7 +22,7 @@ interface DOMWrapProps {
 }
 
 interface DOMWrapState {
-  lastVisibleIndex: number,
+  lastVisibleIndex: number;
 }
 
 class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
@@ -47,7 +47,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
   menuItemSizes: number[] = [];
 
   state: DOMWrapState = {
-    lastVisibleIndex: number;
+    lastVisibleIndex: number,
   }
 
   componentDidMount() {

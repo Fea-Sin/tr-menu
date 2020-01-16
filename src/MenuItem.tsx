@@ -43,7 +43,7 @@ export interface MenuItemProps {
   role?: string;
   inlineIndent?: number;
   level?: number;
-  direction?: 'ltr' | 'rtl'; 
+  direction?: 'ltr' | 'rtl';
 }
 
 export class MenuItem extends React.Component<MenuItemProps> {
@@ -54,12 +54,12 @@ export class MenuItem extends React.Component<MenuItemProps> {
     onMouseEnter: noop,
     onMouseLeave: noop,
     manualRef: noop,
-  }
+  };
   node: HTMLLIElement;
 
   componentDidMount() {
     // invoke customized ref to expose component to mixin
-    this.callRef()
+    this.callRef();
   }
   componentDidUpdate(prevProps: MenuItemProps) {
     const { active, parentMenu, eventKey } = this.props;
@@ -73,56 +73,56 @@ export class MenuItem extends React.Component<MenuItemProps> {
         scrollIntoView(this.node, {
           scrollMode: 'if-needed',
           boundary: ReactDOM.findDOMNode(parentMenu) as Element,
-          block: 'nearest'
-        })
-        parentMenu[`scrolled-${eventKey}`]
+          block: 'nearest',
+        });
+        parentMenu[`scrolled-${eventKey}`];
       }
     } else if (parentMenu && parentMenu[`scrolled-${eventKey}`]) {
-      delete parentMenu[`scrolled-${eventKey}`]
+      delete parentMenu[`scrolled-${eventKey}`];
     }
-    this.callRef()
+    this.callRef();
   }
   componentWillUnmount() {
     const { props } = this;
     if (props.onDestory) {
-      props.onDestory(props.eventKey)
+      props.onDestory(props.eventKey);
     }
   }
 
   public onKeyDown = (
-    e: React.KeyboardEvent<HTMLElement>
+    e: React.KeyboardEvent<HTMLElement>,
   ): boolean | undefined => {
     const { keyCode } = e;
     if (keyCode === keyCode.ENTER) {
-      this.onClick(e as any)
+      this.onClick(e as any);
       return true;
     }
     return undefined;
-  }
+  };
 
   onMouseLeave: React.MouseEventHandler<HTMLElement> = e => {
-    const { eventKey, onItemHover, onMouseEnter } = this.props
+    const { eventKey, onItemHover, onMouseEnter } = this.props;
     onItemHover({
       key: eventKey,
-      hover: false
-    })
+      hover: false,
+    });
     onMouseLeave({
       key: eventKey,
       domEvent: e,
-    })
-  }
+    });
+  };
 
   onMouseEnter: React.MouseEventHandler<HTMLElement> = e => {
-    const { eventKey, onItemHover, onMouseEnter } = this.props
+    const { eventKey, onItemHover, onMouseEnter } = this.props;
     onItemHover({
       key: eventKey,
       hover: true,
-    })
+    });
     onMouseEnter({
       key: eventKey,
       domEvent: e,
-    })
-  }
+    });
+  };
 
   onClick: React.MouseEventHandler<HTMLElement> = e => {
     const {
@@ -132,24 +132,24 @@ export class MenuItem extends React.Component<MenuItemProps> {
       onSelect,
       onDeselect,
       isSelected,
-    } = this.props
+    } = this.props;
     const info = {
       key: eventKey,
       keyPath: [eventKey],
       item: this,
       domEvent: e,
-    }
-    onClick(info)
+    };
+    onClick(info);
     if (multiple) {
       if (isSelected) {
-        onDeselect(info)
+        onDeselect(info);
       } else {
-        onSelect(info)
+        onSelect(info);
       }
     } else if (!isSelected) {
-      onSelect(info)
+      onSelect(info);
     }
-  }
+  };
 
   getPrefixCls() {
     return `${this.props.rootPrefixCls}-item`;
@@ -166,21 +166,21 @@ export class MenuItem extends React.Component<MenuItemProps> {
 
   saveNode = (node: HTMLElement) => {
     this.node = node;
-  }
+  };
 
   callRef() {
     if (this.props.manualRef) {
-      this.props.manualRef(this)
+      this.props.manualRef(this);
     }
   }
 
   render() {
-    const props = {...this.props}
+    const props = { ...this.props };
     const className = classNames(this.getPrefixCls(), props.className, {
       [this.getActiveClassName()]: !props.disabled && props.active,
       [this.getselectedClassName()]: props.isSelected,
       [this.getDisabledClassName()]: props.disabled,
-    })
+    });
     let attrs: {
       title?: string;
       className?: string;
@@ -194,39 +194,39 @@ export class MenuItem extends React.Component<MenuItemProps> {
       // set to menuitem by default
       role: props.role || 'menuitem',
       'aria-disabled': props.disabled,
-    }
+    };
 
     if (props.role === 'option') {
       attrs = {
         ...attrs,
         role: 'option',
-        'aria-selected': props.isSelected
-      }
+        'aria-selected': props.isSelected,
+      };
     } else if (props.role === null || props.role === 'node') {
-      attrs.role = 'node'
+      attrs.role = 'node';
     }
 
     const mouseEvent = {
       onClick: props.disabled ? null : this.onClick,
       onMouseLeave: props.disabled ? null : this.onMouseLeave,
       onMouseEnter: props.disabled ? null : this.onMouseEnter,
-    }
+    };
 
     const style = {
       ...props.style,
-    }
+    };
     if (props.mode === 'inline') {
       if (props.direction === 'rtl') {
-        style.paddingRight = props.inlineIndent * props.level
+        style.paddingRight = props.inlineIndent * props.level;
       } else {
-        style.paddingLeft = props.inlineIndent * props.level
+        style.paddingLeft = props.inlineIndent * props.level;
       }
     }
-    menuAllProps.forEach(key => delete props[key])
-    delete props.direction
-    let icon = this.props.itemIcon
+    menuAllProps.forEach(key => delete props[key]);
+    delete props.direction;
+    let icon = this.props.itemIcon;
     if (typeof this.props.itemIcon === 'function') {
-      icon = React.createElement(this.props.itemIcon as any, this.props)
+      icon = React.createElement(this.props.itemIcon as any, this.props);
     }
     return (
       <li
@@ -239,15 +239,15 @@ export class MenuItem extends React.Component<MenuItemProps> {
         {props.children}
         {icon}
       </li>
-    )
+    );
   }
 }
 
 const connected = connect(
   ({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
     active: activeKey[subMenuKey] === eventKey,
-    isSelected: selectedKeys.indexOf(eventKey) !== -1
-  })
-)(MenuItem)
+    isSelected: selectedKeys.indexOf(eventKey) !== -1,
+  }),
+)(MenuItem);
 
 export default connected;
