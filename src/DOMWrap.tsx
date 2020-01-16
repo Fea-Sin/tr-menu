@@ -61,8 +61,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
         entries.forEach(this.setChildrenWidthAndResize)
       })
 
-      [].slice
-        .call(menuUl.children)
+      [].slice.call(menuUl.children)
         .call(menuUl)
         .forEach((el: HTMLElement) => {
           this.resizeObserver.observer(el)
@@ -71,8 +70,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
       if (typeof MutationObserver !== 'undefined') {
         this.mutationObserver = new MutationObserver(() => {
           this.resizeObserver.disconnect()
-          [].slice
-            .call(menuUl.children)
+          [].slice.call(menuUl.children)
             .concat(menuUl)
             .forEach((el: HTMLElement) => {
               this.resizeObserver.observer(el)
@@ -107,8 +105,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
     }
 
     // filter out all overflowed indicator placeholder
-    return [].slice
-      .call(ul.children)
+    return [].slice.call(ul.children)
       .filter(
         (node: HTMLElement) =>
           node.className.split(' ').indexOf(`${prefixCls}-overflowed-submenu`) < 0,
