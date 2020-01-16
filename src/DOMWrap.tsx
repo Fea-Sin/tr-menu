@@ -106,7 +106,8 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
     }
 
     // filter out all overflowed indicator placeholder
-    return [].slice.call(ul.children)
+    // return [].slice.call(ul.children)
+    return (ul.children || []).slice()
       .filter(
         (node: HTMLElement) =>
           node.className.split(' ').indexOf(`${prefixCls}-overflowed-submenu`) < 0,
@@ -254,7 +255,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
 
       this.menuItemSizes.forEach(liWidth => {
         currentSumWidth += liWidth;
-        fi (currentSumWidth + this.overflowedIndicatorWidth <= width) {
+        if (currentSumWidth + this.overflowedIndicatorWidth <= width) {
           lastVisibleIndex + = 1
         }
       })
