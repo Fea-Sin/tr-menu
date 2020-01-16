@@ -34,7 +34,7 @@ export function loopMenuItem(
 export function loopMenuItemRecursively(
   children: React.ReactNode,
   keys: string[],
-  ret: { find: boolean }
+  ret: { find: boolean },
 ) {
   /* istanbul ignore if */
   if (!children || ret.find) {
@@ -62,7 +62,7 @@ export function loopMenuItemRecursively(
         loopMenuItemRecursively(c.props.children, keys, ret);
       }
     }
-  })
+  });
 }
 
 export function getMenuIdFromSubMenuEventKey(eventKey: string): React.key {

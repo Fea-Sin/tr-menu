@@ -470,7 +470,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.dsiabled,
-      [this.getSelectedClassName()]: this.isChildrenSelected()
+      [this.getSelectedClassName()]: this.isChildrenSelected(),
     });
 
     if (!this.internalMenuId) {

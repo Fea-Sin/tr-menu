@@ -441,7 +441,7 @@ export class SubPopupMenu extends React.Component<SubPopupMenuProps> {
         {...props}
         prefixCls={prefixCls}
         mode={mode}
-        tag='ul'
+        tag="ul"
         level={level}
         theme={theme}
         visible={visible}
@@ -449,16 +449,17 @@ export class SubPopupMenu extends React.Component<SubPopupMenuProps> {
         {...domProps}
       >
         {React.Children.map(props.children, (c: ReactElement, i) =>
-          this.renderMenuItem(c, i, eventKey || '0-menu-')
+          this.renderMenuItem(c, i, eventKey || '0-menu-'),
         )}
       </DOMWrap>
-    )
+    );
   }
 }
 
-const connected = connect()(SubPopupMenu) as React.ComponentClass<SubPopupMenuProps> &
-  {
-    getWrappedInstance: () => SubPopupMenu;
-  }
+const connected = connect()(SubPopupMenu) as React.ComponentClass<
+  SubPopupMenuProps
+> & {
+  getWrappedInstance: () => SubPopupMenu;
+};
 
 export default connected;

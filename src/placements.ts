@@ -1,7 +1,7 @@
 const autoAdjustOverflow = {
   adjustX: 1,
   adjustY: 1,
-}
+};
 
 export const placements = {
   topLeft: {
@@ -22,7 +22,7 @@ export const placements = {
   rightTop: {
     points: ['tl', 'tr'],
     overflow: autoAdjustOverflow,
-    offset: [4, 0]
+    offset: [4, 0],
   },
 };
 
@@ -46,7 +46,7 @@ export const placementsRtl = {
     points: ['tl', 'tr'],
     overflow: autoAdjustOverflow,
     offset: [4, 0],
-  }
-}
+  },
+};
 
 export default placements;
