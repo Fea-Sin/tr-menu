@@ -1,4 +1,73 @@
+import React from 'react';
+import isMobile from './utils/isMobile';
+import MenuItemGroup from './MenuItemGroup';
+
 export function noop() {}
+
+export function getKeyFromChildrenIndex(
+  child: React.ReactElement,
+  menuEventKey: React.Key,
+  index: number,
+): React.Key {
+  const prefix = menuEventKey || '';
+  return child.key || `${prefix}item_${index}`;
+}
+
+export function loopMenuItem(
+  children: React.ReactNode,
+  cb: (node: React.ReactElement, index: number) => void,
+) {
+  let index = -1;
+  React.Children.forEach(children, (c: React.ReactElement) => {
+    index += 1;
+    if (c && c.type && (c.type as typeof MenuItemGroup).isMenuItemGroup) {
+      React.Children.forEach(c.props.children, (c2: React.ReactElement) => {
+        index += 1;
+        cb(c2, index);
+      });
+    } else {
+      cb(c, index);
+    }
+  });
+}
+
+export function loopMenuItemRecursively(
+  children: React.ReactNode,
+  keys: string[],
+  ret: { find: boolean }
+) {
+  /* istanbul ignore if */
+  if (!children || ret.find) {
+    return;
+  }
+  React.Children.forEach(children, (c: React.ReactElement) => {
+    if (c) {
+      const construct = c.type as (
+        | typeof MenuItemGroup
+        | typeof MenuItem
+        | typeof SubMenu);
+      if (
+        !construct ||
+        !(
+          construct.isSubMenu ||
+          construct.isMenuItem ||
+          construct.isMenuItemGroup
+        )
+      ) {
+        return;
+      }
+      if (keys.indexOf((c as any).key) !== -1) {
+        ret.find = true;
+      } else if (c.props.children) {
+        loopMenuItemRecursively(c.props.children, keys, ret);
+      }
+    }
+  })
+}
+
+export function getMenuIdFromSubMenuEventKey(eventKey: string): React.key {
+  return `${eventKey}-menu-`;
+}
 
 export const menuAllProps = [
   'defaultSelectedKeys',
@@ -80,3 +149,5 @@ export const setStyle = (
     elem.style[styleProperty] = value;
   }
 };
+
+export const isMobileDevice = (): boolean => isMobile.any;
