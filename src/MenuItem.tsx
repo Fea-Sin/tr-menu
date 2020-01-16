@@ -51,9 +51,9 @@ export class MenuItem extends React.Component<MenuItemProps> {
 
   static defaultProps = {
     onSelect: noop,
-    onMouseEnter: noop;
-    onMouseLeave: noop;
-    manualRef: noop;
+    onMouseEnter: noop,
+    onMouseLeave: noop,
+    manualRef: noop,
   }
   node: HTMLLIElement;
 

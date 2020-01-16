@@ -8,7 +8,6 @@ class App extends PureComponent {
     return (
       <div>
         <div>THIS IS EXAM</div>
-        <div>{Hello}</div>
       </div>
     );
   }

@@ -22,7 +22,7 @@ interface DOMWrapProps {
 }
 
 interface DOMWrapState {
-  lastVisibleIndex: number;
+  lastVisibleIndex: number,
 }
 
 class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {

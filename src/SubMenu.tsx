@@ -465,7 +465,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
     const { isOpen } = props
     const prefixCls = this.getPrefixCls()
     const isInlineMode = props.mode === 'inline';
-    const className = classNames(prefixCls, `${prefixCls}-${props.mode}`), {
+    const className = classNames(prefixCls, `${prefixCls}-${props.mode}`, {
       [props.className]: !!props.className,
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
