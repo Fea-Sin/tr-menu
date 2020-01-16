@@ -1,5 +1,14 @@
-const hello = 'hello world';
+import Menu from './Menu';
+import SubMenu from './SubMenu';
+import MenuItem from './MenuItem';
+import MenuItemGroup from './MenuItemGroup';
 
-console.log(hello); // eslint-disable-line
+export {
+  SubMenu,
+  MenuItem as Item,
+  MenuItem,
+  MenuItemGroup,
+  MenuItemGroup as ItemGroup,
+};
 
-export default hello;
+export default Menu;
