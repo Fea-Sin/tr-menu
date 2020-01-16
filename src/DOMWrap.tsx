@@ -61,11 +61,12 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
         entries.forEach(this.setChildrenWidthAndResize)
       })
 
-      [].slice.call(menuUl.children)
-        .call(menuUl)
+      [].slice
+        .call(menuUl.children)
+        .concat(menuUl)
         .forEach((el: HTMLElement) => {
-          this.resizeObserver.observer(el)
-        })
+          this.resizeObserver.observe(el);
+        });
       
       if (typeof MutationObserver !== 'undefined') {
         this.mutationObserver = new MutationObserver(() => {
