@@ -16,5 +16,6 @@ module.exports = {
     'jsx-ally/label-has-for': 0,
     'import/no-named-as-default-member': 'off',
     'eslint-comments/no-unlimited-disable': 'off',
+    'react/no-find-dom-node': 'off',
   }
 }
