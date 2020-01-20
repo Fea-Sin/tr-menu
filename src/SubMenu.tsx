@@ -328,7 +328,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
 
   getSelectedClassName = () => `${this.getPrefixCls()}-selected`;
 
-  getOpenClassName = () => `${this.getPrefixCls()}-submenu-open`;
+  getOpenClassName = () => `${this.props.rootPrefixCls}-submenu-open`;
 
   saveMenuInstance = (c: MenuItem) => {
     // children menu instance
