@@ -41,6 +41,7 @@ export interface MenuItemProps {
   manualRef?: LegacyFunctionRef;
   itemIcon?: RenderIconType;
   role?: string;
+  mode?: MenuMode;
   inlineIndent?: number;
   level?: number;
   direction?: 'ltr' | 'rtl';
@@ -55,12 +56,14 @@ export class MenuItem extends React.Component<MenuItemProps> {
     onMouseLeave: noop,
     manualRef: noop,
   };
+
   node: HTMLLIElement;
 
   componentDidMount() {
     // invoke customized ref to expose component to mixin
     this.callRef();
   }
+
   componentDidUpdate(prevProps: MenuItemProps) {
     const { active, parentMenu, eventKey } = this.props;
     // 在 parentMenu 上层保存滚动状态，避免重复的 MenuItem key 导致滚动跳动
@@ -75,13 +78,14 @@ export class MenuItem extends React.Component<MenuItemProps> {
           boundary: ReactDOM.findDOMNode(parentMenu) as Element,
           block: 'nearest',
         });
-        parentMenu[`scrolled-${eventKey}`];
+        parentMenu[`scrolled-${eventKey}`] = true;
       }
     } else if (parentMenu && parentMenu[`scrolled-${eventKey}`]) {
       delete parentMenu[`scrolled-${eventKey}`];
     }
     this.callRef();
   }
+
   componentWillUnmount() {
     const { props } = this;
     if (props.onDestory) {
@@ -93,7 +97,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
     e: React.KeyboardEvent<HTMLElement>,
   ): boolean | undefined => {
     const { keyCode } = e;
-    if (keyCode === keyCode.ENTER) {
+    if (keyCode === KeyCode.ENTER) {
       this.onClick(e as any);
       return true;
     }
@@ -101,7 +105,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
   };
 
   onMouseLeave: React.MouseEventHandler<HTMLElement> = e => {
-    const { eventKey, onItemHover, onMouseEnter } = this.props;
+    const { eventKey, onItemHover, onMouseLeave } = this.props;
     onItemHover({
       key: eventKey,
       hover: false,
@@ -154,12 +158,15 @@ export class MenuItem extends React.Component<MenuItemProps> {
   getPrefixCls() {
     return `${this.props.rootPrefixCls}-item`;
   }
+
   getActiveClassName() {
     return `${this.getPrefixCls()}-active`;
   }
+
   getselectedClassName() {
     return `${this.getPrefixCls()}-selected`;
   }
+
   getDisabledClassName() {
     return `${this.getPrefixCls()}-disabled`;
   }
@@ -206,6 +213,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
       attrs.role = 'node';
     }
 
+    // In case that onClick/onMouseLeave/onMouseEnter is passed down from owner
     const mouseEvent = {
       onClick: props.disabled ? null : this.onClick,
       onMouseLeave: props.disabled ? null : this.onMouseLeave,

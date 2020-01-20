@@ -277,6 +277,10 @@ export class SubPopupMenu extends React.Component<SubPopupMenuProps> {
     this.props.onClick(e);
   };
 
+  onOpenChange: OpenEventHandler = e => {
+    this.props.onOpenChange(e);
+  };
+
   onDestroy: DestroyEventHandler = key => {
     /* istanbul ignore next */
     this.props.onDestroy(key);
