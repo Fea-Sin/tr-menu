@@ -63,6 +63,10 @@ export interface SubMenuProps {
   title?: React.ReactNode;
   children?: React.ReactNode;
   selectedKeys?: string[];
+  openKeys?: string[];
+  onClick?: MenuClickEventHandler;
+  onOpenChange?: OpenEventHandler;
+  rootPrefixCls?: string;
   eventyKey?: string;
   multiple?: boolean;
   active?: boolean; // TODO: remove
@@ -125,10 +129,15 @@ export class SubMenu extends React.Component<SubMenuProps> {
   }
 
   isRootMenu: boolean;
+
   menuInstance: MenuItem;
+
   subMenuTitle: HTMLElement;
+
   internalMenuId: string;
+
   haveRendered: boolean;
+
   haveOpened: boolean;
 
   /**
@@ -137,6 +146,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
    * we not use `window.setTimeout` instead of `setTimeout`.
    */
   minWidthTimeout: any;
+
   mouseenterTimeout: any;
 
   componentDidMount() {
@@ -226,9 +236,11 @@ export class SubMenu extends React.Component<SubMenuProps> {
   onOpenChange: OpenEventHandler = e => {
     this.props.onOpenChange(e);
   };
+
   onPopupVisibleChange = (visible: boolean) => {
     this.triggerOpenChange(visible, visible ? 'mouseenter' : 'mouseleave');
   };
+
   onMouseEnter: React.MouseEventHandler<HTMLElement> = e => {
     const { eventKey: key, onMouseEnter, store } = this.props;
     updateDefaultActiveFirst(store, this.props.eventyKey, false);
@@ -303,6 +315,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
   onSelect: SelectEventHandler = info => {
     this.props.onSelect(info);
   };
+
   onDeselect: SelectEventHandler = info => {
     this.props.onDeselect(info);
   };
@@ -326,6 +339,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
     ...info,
     keyPath: (info.keyPath || []).concat(this.props.eventyKey),
   });
+
   triggerOpenChange = (open: boolean, type?: string) => {
     const key = this.props.eventyKey;
     const openChange = () => {
@@ -383,14 +397,13 @@ export class SubMenu extends React.Component<SubMenuProps> {
       onClick: this.onSubMenuClick,
       onSelect: this.onSelect,
       onDeselect: this.onDeselect,
-      onDestroy: this,
-      onDestroy,
+      onDestroy: this.onDestroy,
       selectedKeys: props.selectedKeys,
       eventKey: `${props.eventyKey}-menu-`,
       openKeys: props.openKeys,
       motion: props.motion,
       onOpenChange: this.onOpenChange,
-      subMenuCloseDelay: props.subMenuCloseDelay,
+      subMenuOpenDelay: props.subMenuOpenDelay,
       parentMenu: this,
       subMenuCloseDelay: props.subMenuCloseDelay,
       forceSubMenuRender: props.forceSubMenuRender,
@@ -532,7 +545,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
     // expand custom icon should NOT be displayed in menu with horizontal mode.
     let icon = null;
     if (props.mode !== 'horizontal') {
-      icon = this.props.expandIcon; //ReactNode
+      icon = this.props.expandIcon; // ReactNode
       if (typeof this.props.expandIcon === 'function') {
         icon = React.createElement(this.props.expandIcon as any, {
           ...this.props,
@@ -544,6 +557,7 @@ export class SubMenu extends React.Component<SubMenuProps> {
       <div
         ref={this.saveSubMenuTitle}
         style={style}
+        className={`${prefixCls}-title`}
         {...titleMouseEvents}
         {...titleClickEvents}
         aria-expanded={isOpen}
@@ -582,7 +596,12 @@ export class SubMenu extends React.Component<SubMenuProps> {
         : Object.assign({}, placements, builtinPlacements);
     delete props.direction;
     return (
-      <li>
+      <li
+        {...(props as nay)}
+        {...mouseEvents}
+        className={className}
+        role="menuitem"
+      >
         {isInlineMode && title}
         {isInlineMode && children}
         {!isInlineMode && (
