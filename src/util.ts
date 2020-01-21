@@ -148,8 +148,7 @@ export const setStyle = (
   value: string | number,
 ) => {
   if (elem && typeof elem.style === 'object') {
-    // eslint-disable-line
-    elem.style[styleProperty] = value;
+    elem.style[styleProperty] = value; // eslint-disable-line
   }
 };
 
