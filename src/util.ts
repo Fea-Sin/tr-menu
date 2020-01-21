@@ -63,7 +63,7 @@ export function loopMenuItemRecursively(
         return;
       }
       if (keys.indexOf((c as any).key) !== -1) {
-        ret.find = true;
+        ret.find = true; // eslint-disable-line
       } else if (c.props.children) {
         loopMenuItemRecursively(c.props.children, keys, ret);
       }
@@ -131,6 +131,7 @@ export const menuAllProps = [
   'expandIcon',
 ];
 
+// eslint-disable-next-line
 export const getWidth = (elem: HTMLElement) => {
   let width =
     elem &&
