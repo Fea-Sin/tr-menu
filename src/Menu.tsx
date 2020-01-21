@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider, create } from 'mini-store';
-import { noop } from './util';
 import SubPopupMenu, { getActiveKey } from './SubPopupMenu';
+import { noop } from './util';
 import {
   RenderIconType,
   SelectInfo,
@@ -24,13 +24,14 @@ export interface MenuProps
   defaultActiveFirst?: boolean;
   selectedKeys?: string[];
   defaultOpenKeys?: string[];
+  openKeys?: string[];
   mode?: MenuMode;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
   onClick?: MenuClickEventHandler;
   onSelect?: SelectEventHandler;
   onOpenChange?: OpenEventHandler;
   onDeselect?: SelectEventHandler;
-  onDestory?: DestroyEventHandler;
+  onDestroy?: DestroyEventHandler;
   subMenuOpenDelay?: number;
   subMenuCloseDelay?: number;
   forceSubMenuRender?: boolean;
@@ -39,15 +40,19 @@ export interface MenuProps
   selectable?: boolean;
   multiple?: boolean;
   activeKey?: string;
-  prefixCls: string;
+  prefixCls?: string;
   builtinPlacements?: BuiltinPlacements;
   itemIcon?: RenderIconType;
   expandIcon?: RenderIconType;
   overflowedIndicator?: React.ReactNode;
+  /** Menu motion define */
   motion?: MotionType;
   /** @deprecated please use `motion` instead */
   openTransitionName?: string;
+  /** @deprecated please use `motion` instead */
   openAnimation?: OpenAnimation;
+
+  /** direction of menu */
   direction?: 'ltr' | 'rtl';
 }
 
@@ -158,7 +163,7 @@ class Menu extends React.Component<MenuProps> {
       changed = changed || oneChanged;
     };
     if (Array.isArray(event)) {
-      // batch change all
+      // batch change call
       event.forEach(processSingle);
     } else {
       processSingle(event);
@@ -197,7 +202,7 @@ class Menu extends React.Component<MenuProps> {
     let transitionName = props.openTransitionName;
     const animationName = props.openAnimation;
     if (!transitionName && typeof animationName === 'string') {
-      transitionName = `${props.profixCls}-open-${animationName}`;
+      transitionName = `${props.prefixCls}-open-${animationName}`;
     }
     return transitionName;
   };

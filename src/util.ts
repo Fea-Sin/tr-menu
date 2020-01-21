@@ -1,6 +1,8 @@
 import React from 'react';
 import isMobile from './utils/isMobile';
 import MenuItemGroup from './MenuItemGroup';
+import SubMenu from './SubMenu';
+import MenuItem from './MenuItem';
 
 export function noop() {}
 
@@ -11,6 +13,10 @@ export function getKeyFromChildrenIndex(
 ): React.Key {
   const prefix = menuEventKey || '';
   return child.key || `${prefix}item_${index}`;
+}
+
+export function getMenuIdFromSubMenuEventKey(eventKey: string): React.Key {
+  return `${eventKey}-menu-`;
 }
 
 export function loopMenuItem(
@@ -63,10 +69,6 @@ export function loopMenuItemRecursively(
       }
     }
   });
-}
-
-export function getMenuIdFromSubMenuEventKey(eventKey: string): React.key {
-  return `${eventKey}-menu-`;
 }
 
 export const menuAllProps = [
