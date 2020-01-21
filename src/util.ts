@@ -131,7 +131,6 @@ export const menuAllProps = [
   'expandIcon',
 ];
 
-// eslint-disable-next-line
 export const getWidth = (elem: HTMLElement) => {
   let width =
     elem &&
@@ -149,6 +148,7 @@ export const setStyle = (
   value: string | number,
 ) => {
   if (elem && typeof elem.style === 'object') {
+    // eslint-disable-line
     elem.style[styleProperty] = value;
   }
 };
