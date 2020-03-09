@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { connect } from 'mini-store';
 import KeyCode from 'rc-util/lib/KeyCode';
 import createChainedFunction from 'rc-util/lib/createChainedFunction';
@@ -7,9 +7,9 @@ import classNames from 'classnames';
 import {
   getKeyFromChildrenIndex,
   loopMenuItem,
+  noop,
   menuAllProps,
   isMobileDevice,
-  noop,
 } from './util';
 import DOMWrap from './DOMWrap';
 import {
@@ -85,7 +85,7 @@ export function getActiveKey(
   activeKey = null;
   if (props.defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
-      if (!activeKey && !c.props.disabled) {
+      if (!activeKey && c && !c.props.disabled) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
       }
     });
@@ -115,7 +115,8 @@ export interface SubPopupMenuProps {
   onDestroy?: DestroyEventHandler;
   openKeys?: string[];
   visible?: boolean;
-  children?: React.ReactInstance;
+  children?: React.ReactNode;
+  parentMenu?: React.ReactInstance;
   eventKey?: React.Key;
   store?: MiniStore;
 
@@ -290,7 +291,9 @@ export class SubPopupMenu extends React.Component<SubPopupMenuProps> {
 
   step = (direction: number) => {
     let children = this.getFlatInstanceArray();
-    const activeKey = this.props.getState().activeKey[getEventKey(this.props)];
+    const activeKey = this.props.store.getState().activeKey[
+      getEventKey(this.props)
+    ];
     const len = children.length;
     if (!len) {
       return null;

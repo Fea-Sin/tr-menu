@@ -33,7 +33,7 @@ class MenuItemGroup extends React.Component<MenuItemGroupProps> {
   render() {
     const { ...props } = this.props;
     const { className = '', rootPrefixCls } = props;
-    const titleClassName = `${rootPrefixcls}-item-group-title`;
+    const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
     const { title, children } = props;
     menuAllProps.forEach(key => delete props[key]);

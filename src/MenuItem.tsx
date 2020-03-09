@@ -17,10 +17,10 @@ import {
 } from './interface';
 
 export interface MenuItemProps {
-  /** @deprecated No place to use this should remove */
+  /** @deprecated No place to use this. Should remove */
   attribute?: Record<string, string>;
   rootPrefixCls?: string;
-  eventKey?: React.key;
+  eventKey?: React.Key;
   className?: string;
   style?: React.CSSProperties;
   active?: boolean;
@@ -33,7 +33,7 @@ export interface MenuItemProps {
   onClick?: MenuClickEventHandler;
   onDeselect?: SelectEventHandler;
   parentMenu?: React.ReactInstance;
-  onDestory?: DestroyEventHandler;
+  onDestroy?: DestroyEventHandler;
   onMouseEnter?: MenuHoverEventHandler;
   onMouseLeave?: MenuHoverEventHandler;
   multiple?: boolean;
@@ -88,8 +88,8 @@ export class MenuItem extends React.Component<MenuItemProps> {
 
   componentWillUnmount() {
     const { props } = this;
-    if (props.onDestory) {
-      props.onDestory(props.eventKey);
+    if (props.onDestroy) {
+      props.onDestroy(props.eventKey);
     }
   }
 
@@ -163,7 +163,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
     return `${this.getPrefixCls()}-active`;
   }
 
-  getselectedClassName() {
+  getSelectedClassName() {
     return `${this.getPrefixCls()}-selected`;
   }
 
@@ -171,7 +171,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
     return `${this.getPrefixCls()}-disabled`;
   }
 
-  saveNode = (node: HTMLElement) => {
+  saveNode = (node: HTMLLIElement) => {
     this.node = node;
   };
 
@@ -185,7 +185,7 @@ export class MenuItem extends React.Component<MenuItemProps> {
     const props = { ...this.props };
     const className = classNames(this.getPrefixCls(), props.className, {
       [this.getActiveClassName()]: !props.disabled && props.active,
-      [this.getselectedClassName()]: props.isSelected,
+      [this.getSelectedClassName()]: props.isSelected,
       [this.getDisabledClassName()]: props.disabled,
     });
     let attrs: {
@@ -209,8 +209,8 @@ export class MenuItem extends React.Component<MenuItemProps> {
         role: 'option',
         'aria-selected': props.isSelected,
       };
-    } else if (props.role === null || props.role === 'node') {
-      attrs.role = 'node';
+    } else if (props.role === null || props.role === 'none') {
+      attrs.role = 'none';
     }
 
     // In case that onClick/onMouseLeave/onMouseEnter is passed down from owner

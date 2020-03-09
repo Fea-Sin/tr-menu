@@ -47,9 +47,9 @@ export interface MenuProps
   overflowedIndicator?: React.ReactNode;
   /** Menu motion define */
   motion?: MotionType;
-  /** @deprecated please use `motion` instead */
+  /** @deprecated Please use `motion` instead */
   openTransitionName?: string;
-  /** @deprecated please use `motion` instead */
+  /** @deprecated Please use `motion` instead */
   openAnimation?: OpenAnimation;
 
   /** direction of menu */

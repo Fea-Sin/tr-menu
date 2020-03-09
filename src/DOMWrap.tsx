@@ -6,7 +6,7 @@ import { MenuMode } from './interface';
 import SubMenu from './SubMenu';
 
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
-const FLOAT_FRECISION_ADJUST = 0.5;
+const FLOAT_PRECISION_ADJUST = 0.5;
 
 interface DOMWrapProps {
   className?: string;
@@ -59,8 +59,9 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
       }
       this.resizeObserver = new ResizeObserver(entries => {
         entries.forEach(this.setChildrenWidthAndResize);
-      })(menuUl.children || [])
-        .slice()
+      });
+      [].slice
+        .call(menuUl.children)
         .concat(menuUl)
         .forEach((el: HTMLElement) => {
           this.resizeObserver.observe(el);
@@ -68,17 +69,18 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
 
       if (typeof MutationObserver !== 'undefined') {
         this.mutationObserver = new MutationObserver(() => {
-          this.resizeObserver
-            .disconnect()(menuUl.children || [])
-            .slice()
+          this.resizeObserver.disconnect();
+
+          [].slice
+            .call(menuUl.children)
             .concat(menuUl)
             .forEach((el: HTMLElement) => {
-              this.resizeObserver.observer(el);
+              this.resizeObserver.observe(el);
             });
           this.setChildrenWidthAndResize();
         });
 
-        this.mutationObserver.observer(menuUl, {
+        this.mutationObserver.observe(menuUl, {
           attributes: false,
           childList: true,
           subTree: false,
@@ -106,8 +108,8 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
 
     // filter out all overflowed indicator placeholder
     // return [].slice.call(ul.children)
-    return (ul.children || [])
-      .slice()
+    return [].slice
+      .call(ul.children)
       .filter(
         (node: HTMLElement) =>
           node.className.split(' ').indexOf(`${prefixCls}-overflowed-submenu`) <
@@ -251,7 +253,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
     // float number comparison could be problematic
     // e.g. 0.1 + 0.2 > 0.3 =====> true
     // thus using FLOAT_PRECISION_ADJUST as buffer to help the situation
-    if (this.originalTotalWidth > width + FLOAT_FRECISION_ADJUST) {
+    if (this.originalTotalWidth > width + FLOAT_PRECISION_ADJUST) {
       lastVisibleIndex = -1;
 
       this.menuItemSizes.forEach(liWidth => {

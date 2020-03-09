@@ -80,7 +80,7 @@ export const menuAllProps = [
   'getPopupContainer',
   'onSelect',
   'onDeselect',
-  'onDestory',
+  'onDestroy',
   'openTransitionName',
   'openAnimation',
   'subMenuOpenDelay',
