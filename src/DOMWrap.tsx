@@ -198,7 +198,7 @@ class DOMWrap extends React.Component<DOMWrapProps, DOMWrapState> {
       return;
     }
 
-    const lastOverflowedIndicatorPlaceholder = ul.childre[
+    const lastOverflowedIndicatorPlaceholder = ul.children[
       ulChildrenNodes.length - 1
     ] as HTMLElement;
 
