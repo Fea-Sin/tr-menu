@@ -107,3 +107,9 @@ popupOffset: Array; The offset of the popup submenu, [0, 15]
 expandIcon: ReactNode; Specify the menu icon
 
 itemIcon: Specify the menu item icon
+
+## Menu.ItemGroup
+
+title: title of item group
+
+children: MenuItems or other React.Element[]
