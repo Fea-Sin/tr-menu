@@ -9,13 +9,6 @@ import { MenuItem as NakedMenuItem } from '../src/MenuItem';
 describe('MenuItem', () => {
   const subMenuIconText = 'SubMenuIcon';
   const menuItemIconText = 'MenuItemIcon';
-  // function itemIcon() {
-  //   return <span>{menuItemIconText}</span>;
-  // }
-
-  // function expandIcon() {
-  //   return <span>{subMenuIconText}</span>;
-  // }
 
   describe('disabled', () => {
     it('can not be active by key down', () => {
