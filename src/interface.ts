@@ -5,37 +5,37 @@ export type RenderIconType =
   | ((props: any) => React.ReactNode);
 
 export interface MenuInfo {
-  key: React.key;
-  keyPath: React.key[];
+  key: React.Key;
+  keyPath: React.Key[];
   item: React.ReactInstance;
   domEvent: React.MouseEvent<HTMLElement>;
 }
 
 export interface SelectInfo extends MenuInfo {
-  selectedKeys?: React.key[];
+  selectedKeys?: React.Key[];
 }
 
 export type SelectEventHandler = (info: SelectInfo) => void;
 
 export type HoverEventHandler = (info: {
-  key: React.key;
+  key: React.Key;
   hover: boolean;
 }) => void;
 
 export type MenuHoverEventHandler = (info: {
-  key: React.key;
+  key: React.Key;
   domEvent: React.MouseEvent<HTMLElement>;
 }) => void;
 
 export type MenuClickEventHandler = (info: MenuInfo) => void;
 
-export type DestroyEventHandler = (key: React.key) => void;
+export type DestroyEventHandler = (key: React.Key) => void;
 
 export type OpenEventHandler = (
   keys:
-    | React.key[]
+    | React.Key[]
     | {
-        key: React.key;
+        key: React.Key;
         item: React.ReactInstance;
         trigger: string;
         open: boolean;

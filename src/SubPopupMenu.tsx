@@ -455,7 +455,7 @@ export class SubPopupMenu extends React.Component<SubPopupMenuProps> {
         overflowedIndicator={overflowedIndicator}
         {...domProps}
       >
-        {React.Children.map(props.children, (c: ReactElement, i) =>
+        {React.Children.map(props.children, (c: React.ReactElement, i) =>
           this.renderMenuItem(c, i, eventKey || '0-menu-'),
         )}
       </DOMWrap>
