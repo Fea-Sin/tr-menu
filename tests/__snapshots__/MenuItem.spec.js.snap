@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuItem overwrite default role should set role to listitem 1`] = `
+<li
+  class="undefined-item"
+  role="listitem"
+>
+  test
+</li>
+`;
+
+exports[`MenuItem overwrite default role should set role to none if none 1`] = `
+<li
+  class="undefined-item"
+  role="none"
+>
+  test
+</li>
+`;
+
+exports[`MenuItem overwrite default role should set role to none if null 1`] = `
+<li
+  class="undefined-item"
+  role="none"
+>
+  test
+</li>
+`;
+
+exports[`MenuItem overwrite default role should set role to option 1`] = `
+<li
+  class="undefined-item"
+  role="option"
+>
+  test
+</li>
+`;
+
+exports[`MenuItem rest props onClick event should only trigger 1 time along the component hierarchy 1`] = `
+<ul
+  class="tr-menu  tr-menu-root tr-menu-inline"
+  role="menu"
+  tabindex="0"
+>
+  <li
+    class="tr-menu-item className tr-menu-item-active"
+    data-whatever="whatever"
+    role="menuitem"
+    style="font-size: 20px; padding-left: 24px;"
+    title="title"
+  >
+    1
+  </li>
+  <li
+    class="tr-menu-submenu tr-menu-submenu-inline className"
+    data-whatever="whatever"
+    role="menuitem"
+    style="font-size: 20px;"
+  >
+    <div
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="tr-menu-submenu-title"
+      style="padding-left: 24px;"
+      title="title"
+    >
+      title
+      <i
+        class="tr-menu-submenu-arrow"
+      />
+    </div>
+    <div />
+  </li>
+  <li
+    class="className tr-menu-item-group"
+    data-whatever="whatever"
+    style="font-size: 20px;"
+  >
+    <div
+      class="tr-menu-item-group-title"
+      title="title"
+    >
+      title
+    </div>
+    <ul
+      class="tr-menu-item-group-list"
+    >
+      <li
+        class="tr-menu-item className"
+        data-whatever="whatever"
+        role="menuitem"
+        style="font-size: 20px; padding-left: 24px;"
+        title="title"
+      >
+        4
+      </li>
+    </ul>
+  </li>
+</ul>
+`;
